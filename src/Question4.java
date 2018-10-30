@@ -17,11 +17,13 @@ public class Question4
     public static void main(String args[]) 
     {
         int row=0,col=0,row2=0,col2=0,price=0,search=0,total=0;
+        String fin="YES";
         boolean ava= true;
         Scanner in = new Scanner(System.in);
         Random random = new Random();
         DecimalFormat normal = new DecimalFormat();
         int theater[][] = new int[9][10];
+        int display [] [] = new int [9][10];
         
         for (int i = 0; i < theater.length; i++) {
             for (int j = 0; j < theater[0].length; j++) {
@@ -43,12 +45,45 @@ public class Question4
                     else if (j == 1 || j == 8) theater[i][j] = 40;
                     else theater[i][j] = 30;
                 }
-                
-                System.out.print(theater[i][j] + " ");
             }
-            
-            System.out.println("");
         }
+        while (!fin.equals("NO"))
+        {
+            total=0;
+                for (int i = 0; i < display.length; i++) {
+            for (int j = 0; j < display[0].length; j++) {
+                if (i <= 2) display[i][j] = 10;
+                else if (i > 2 && i <= 5) {
+                    if (j > 1 && j < 10) display[i][j] = 20;
+                    else display[i][j] = 10;
+                } else if (i == 6) {
+                    if (j == 4 || j == 5) display[i][j] = 40;
+                    else if ((j > 1 && j < 4) || (j > 5 && j < 8)) display[i][j] = 30;
+                    else display[i][j] = 20;
+                } else if (i == 7) {
+                    if (j == 4 || j == 5) display[i][j] = 50;
+                    else if(j == 3 || j == 6) display[i][j] = 40;
+                    else if (j == 1 || j == 2 || j == 7 || j == 8) display[i][j] = 30;
+                    else display[i][j] = 20;
+                } else {
+                    if (j > 1 && j < 8) display[i][j] = 50;
+                    else if (j == 1 || j == 8) display[i][j] = 40;
+                    else display[i][j] = 30;
+                }
+            }
+        }
+        
+        
+        System.out.println("");
+        
+             for (int i=0; i<theater.length;i++)
+             {
+                 for (int j=0; j<theater[0].length;j++)
+                 {
+                     System.out.print(theater [i] [j] + " ");
+                 }
+                 System.out.println();
+             } 
         //Start of user input
         System.out.println("");
         System.out.println("Do you want to pick a seat by location or price? \nEnter in either 'Location' or 'Price': ");
@@ -84,6 +119,7 @@ public class Question4
                         {
                          System.out.println("");
                          System.out.println("Thank you for the purchase!");
+                         System.out.println("");
                          theater [row][col]=0;
                         }
                     if (answer2.equals("NO"))
@@ -135,11 +171,16 @@ public class Question4
                 
              }
              ava=true;*/
-             for (int i=0; i<theater.length;i++)
+             for (int i=0; i<display.length;i++)
              {
-                 for (int j=0; j<theater[0].length;j++)
+                 for (int j=0; j<display[0].length;j++)
                  {
-                     System.out.print(theater [i] [j] + " ");
+                     
+                     if (display [i] [j] != search)
+                     {
+                         display [i] [j]=0;
+                     }
+                     System.out.print(display [i] [j] + " ");
                  } 
                  System.out.println("");
              }
@@ -151,9 +192,26 @@ public class Question4
             in.nextLine();
             
             theater [row2] [col2]=0;
-            System.out.println("Purchased!");
             System.out.println("");
-             
+            System.out.println("Do you want to buy the ticket? \nEnter 'Yes' or ' No':");
+            String answer3= in.nextLine().toUpperCase();
+                if (answer3.equals("YES"))
+                        {
+                         System.out.println("");
+                         System.out.println("Thank you for the purchase!");
+                         System.out.println("");
+                         theater [row][col]=0;
+                        }
+                    if (answer3.equals("NO"))
+                        {
+                        System.out.println(""); //This might want to be included with the loop
+                        }
+                    
+            System.out.println("");
+            System.out.println("Do you want to purchase another ticket? \nEnter in 'Yes' or 'No'");
+            fin=in.nextLine().toUpperCase();
+            System.out.println("");
+        } 
         }
     } 
 }
